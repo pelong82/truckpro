@@ -109,8 +109,6 @@ DATABASES = {
 
 STATIC_URL = '/static/'
 
-DEBUG = False
-
 STATIC_URLATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = 'media/'
