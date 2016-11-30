@@ -93,8 +93,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-from .base import *
-
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -113,6 +111,6 @@ STATIC_URL = '/static/'
 
 DEBUG = False
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_URLATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = 'media/'
