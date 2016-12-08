@@ -34,8 +34,10 @@
 							<td>{{ order.customer.name }}</td>
 							<td>{{ order.user.first_name }}</td>
 							<td>
-								<a href="{% url 'orders:order_edit' order.id %}" ><button class="btn btn-info">Editar</button></a>
-		                        <a href="" name="{{ order.id }}" data-target="#myModal" data-toggle="modal" class="btn btn-danger btn-delete-client">Eliminar</a>
+								<a href="{% url 'orders:order_edit' order.id %}" ><button class="btn bg-maroon btn-flat">Editar</button></a>
+								<a href="" ><button class="btn bg-orange btn-flat">O_Trabajo</button></a>
+								<a href="" ><button class="btn bg-olive btn-flat">O_Proceso</button></a>
+		                        <a href="" name="{{ order.id }}" data-target="#myModal" data-toggle="modal" class="btn bg-navy btn-flat btn-delete-client">Eliminar</a>
 							</td>
 						</tr>               			
                		{% endfor %}
