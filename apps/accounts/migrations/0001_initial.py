@@ -15,14 +15,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='CustomerUser',
             fields=[
-                ('user', models.OneToOneField(serialize=False, to=settings.AUTH_USER_MODEL, primary_key=True)),
+                ('user', models.OneToOneField(serialize=False, primary_key=True, to=settings.AUTH_USER_MODEL)),
                 ('company', models.CharField(max_length=60)),
             ],
         ),
         migrations.CreateModel(
             name='EmployeeUser',
             fields=[
-                ('user', models.OneToOneField(serialize=False, to=settings.AUTH_USER_MODEL, primary_key=True)),
+                ('user', models.OneToOneField(serialize=False, primary_key=True, to=settings.AUTH_USER_MODEL)),
                 ('job', models.CharField(max_length=40)),
             ],
         ),

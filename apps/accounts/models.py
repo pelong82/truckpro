@@ -6,7 +6,7 @@ from django.conf import settings
 class EmployeeUser(models.Model):
 	user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True)
 	job = models.CharField(max_length=40)
-	
+
 	def __str__(self):
 		return '{}'.format(self.user.username)
 

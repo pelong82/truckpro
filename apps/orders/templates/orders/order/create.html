@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% block contenet %}
+<div class="row">
+	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+		<h3>Nueva Orden</h3>
+		  <p> {{ form.customer.errors }}</p>
+	</div>
+</div>
+<div class="row">
+<form id="formItem" action="{% url 'orders:order_create' %}" method="post" novalidate>
+  <div class="col-lg-3">
+    {{ form.as_p }}  
+  </div>
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  
+    
+    {% csrf_token %}
+      <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
+        <thead>
+          <th>MEDIDA</th>
+          <th>MARCA</th>
+          <th class="col-md-1">SERIE</th>
+          <th class="col-md-1">DISEÑO</th>
+          <th class="col-md-1">CANTIDAD</th>
+          <th class="col-md-1"><button type="button" id="btn-add" class="btn btn-warning">ARGEGAR</button></th>
+        </thead>
+      {{ formset.management_form }}
+      {% for form in formset %}
+        <tr class="item-form">
+          <td>{{ form.measure }}</td>
+          <td>{{ form.brand }}</td>
+          <td>{{ form.serie }}</td>
+          <td>{{ form.design }}</td>
+          <td>{{ form.quantity }}</td>
+          <td><button type="button" id="btn-remove-form" class="btn btn-danger">X</button></td>
+        </tr>
+      {% endfor %}
+      </table>
+      <div class="col-lg-12">
+        <div class="form-group">
+          <button class="btn btn-primary" type="submit">Guardar</button>
+          <a href="{% url 'orders:order_list' %}" class="btn btn-danger">Cancelar</a>
+        </div>
+      </div>
+    </form>
+	</div>
+</div>  
+   
+{% endblock contenet %}
+
+{% block myscript %}
+{% load staticfiles %}
+<script src="{% static 'orders/js/jquery.validate.min.js' %}"></script> 
+<script src="{% static 'orders/js/additional-methods.min.js' %}"></script> 
+<script src="{% static 'orders/js/messages_es.min.js' %}"></script> 
+
+<script>
+  var count_form = 1;
+  $('#btn-add').click(function(e){  
+    var tmpId = 'id_items-';
+    var tmpMeasure = '-measure';
+    var tmpBrand = '-brand';
+    var tmpSerie = '-serie';
+    var tmpDesign = '-design';
+    var tmpQuantity = '-quantity';
+    var rows =  document.getElementById('detalles').rows.length;
+    rows = rows-1;
+    var id_input_measure = tmpId + rows + tmpMeasure;
+    var id_input_brand = tmpId + rows + tmpBrand;
+    var id_input_serie = tmpId + rows + tmpSerie;
+    var id_input_design = tmpId + rows + tmpDesign;
+    var id_input_quantity = tmpId + rows + tmpQuantity;
+    var tbody = $('#detalles').children('tbody');
+    var table = tbody.length ? tbody : $('#detalles');
+    var row = '<tr>'+
+      '<td><input class="form-control" id="'+id_input_measure+'" maxlength="30" name="'+id_input_measure.substr(3)+'" type="text" required />'+
+      '<td><input class="form-control" id="'+id_input_brand+'" maxlength="40" name="'+id_input_brand.substr(3)+'" type="text" required/>'+
+      '<td><input class="form-control" id="'+id_input_serie+'" maxlength="30" name="'+id_input_serie.substr(3)+'" type="text" required />'+
+      '<td><input class="form-control" id="'+id_input_design+'" maxlength="30" name="'+id_input_design.substr(3)+'" type="text" required/>'+
+      '<td><input class="form-control" id="'+id_input_quantity+'" min="1" name="'+id_input_quantity.substr(3)+'" type="number" value="1" />'+
+      '<td><button type="button" id="btn-remove-form" class="btn btn-danger">X</button>'+
+      '</tr>';
+    table.append(row);
+    count_form++;
+
+    $('#id_items-TOTAL_FORMS').attr('value', count_form);
+  });
+
+
+$( document ).ready( function (){
+  $("#formItem").validate();
+});
+
+  // Elimina fila
+  $("#detalles").on('click', '#btn-remove-form', function () {
+      $(this).closest('tr').remove();
+      count_form--;
+      $('#id_items-TOTAL_FORMS').attr('value', count_form);
+  });
+
+</script>
+
+
+  
+{% endblock myscript %}

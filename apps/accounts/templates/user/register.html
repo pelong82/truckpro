@@ -1,0 +1,6 @@
+<h1>CREAR USUARIO</h1>
+<form action="{% url 'accounts:register' %}" method="post">
+	{% csrf_token %}
+  {{ user_form.as_p }}
+  <button class="btn btn-primary" type="submit">Guardar</button>
+</form>

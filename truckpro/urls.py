@@ -18,9 +18,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'', include('apps.orders.urls', namespace='orders')),
     url(r'^accounts/', include('apps.accounts.urls', namespace='accounts')),
-    url(r'^orders/', include('apps.orders.urls', namespace='orders')),
+    url(r'^admin/', include(admin.site.urls)),
 ]
 
 if settings.DEBUG:
